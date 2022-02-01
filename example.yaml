@@ -1,0 +1,35 @@
+esphome:
+  name: audioplayer
+
+  includes:
+    - audio/
+    - EsphomeAudio.h
+  libraries:
+    - SPI
+    - Wire
+    - FS
+    - Wifi
+    - WiFiClientSecure
+    - HTTPClient
+    
+esp32:
+  board: esp32dev
+  framework:
+    type: Arduino
+    version: latest
+
+wifi:
+  power_save_mode: LIGHT
+  ssid: 'SSID'
+  password: 'PASS'
+
+ota:
+logger:
+api:
+
+custom_component:
+  - id: audio
+    lambda: |-
+      auto audio = new EsphomeAudio();
+      return {audio};
+
